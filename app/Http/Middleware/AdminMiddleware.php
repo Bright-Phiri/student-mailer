@@ -17,14 +17,10 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
-            if (Auth::user()->id == 1) {
-                return $next($request);
-            } else {
-                return redirect()->route('home')->with('status', 'Access Denied');
-            }
+        if (Auth::user()->id == 1) {
+            return $next($request);
         } else {
-            return redirect()->route('login')->with('status1', 'Login in first');
+            return redirect()->route('home')->with('status', 'Access Denied');
         }
     }
 }
