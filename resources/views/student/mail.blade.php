@@ -58,6 +58,14 @@
                    icon: 'success',
                    buttons: 'Ok'
                    });
+              },
+              error: function (response){
+                swal({
+                   title: 'Message',
+                   text: 'Connection could not be established',
+                   icon: 'error',
+                   buttons: 'Ok'
+                   });
               }
             })
          }
