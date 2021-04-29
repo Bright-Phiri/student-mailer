@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendMail;
 use Illuminate\Http\Request;
 use App\Models\Student;
+use Illuminate\Support\Facades\Mail;
 
 class StudentController extends Controller
 {
@@ -123,6 +125,19 @@ class StudentController extends Controller
     public function mail()
     {
         return view('student.mail');
+    }
+
+    public function send(Request $request)
+    {
+        $data = array(
+            'subject' => $request->subject,
+            'message' => $request->message
+        );
+        $students = Student::all()->pluck('email');
+        foreach ($students as $student) {
+            Mail::to($student)->send(new SendMail($data));
+        }
+        return response()->json(['status' => 'Mail sent']);
     }
 
     public function restore($id)

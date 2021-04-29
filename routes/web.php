@@ -34,4 +34,5 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('students/{id}/restore', [StudentController::class, 'restore'])->name('students.restore');
     Route::get('students/mail', [StudentController::class, 'mail'])->name('students.mail');
     Route::get('students/settings', [StudentController::class, 'settings'])->name('students.settings');
+    Route::post('students/mail/send', [StudentController::class, 'send'])->name('mails.send');
 });
