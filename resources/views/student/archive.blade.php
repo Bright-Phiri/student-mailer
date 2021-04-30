@@ -51,7 +51,13 @@
  <script>
   $('#students').DataTable();
   function restoreStudent(id){
-      if (confirm('Are you sure you want to restore this record?')){
+    swal({
+      title: "Are you sure you want to restore this record?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+     if (willDelete) {
         $.ajax({
            url: '/students/'+id+'/restore',
            type: 'POST',
@@ -70,12 +76,19 @@
                 })
            }
        });
-      }
+     }
+    });
   }
 
   function deleteStudent(id){
-    if (confirm('Are you sure you want to permanently delete this record?')){
-        $.ajax({
+    swal({
+     title: "Are you sure you want to permanently delete this record?",
+     icon: "warning",
+     buttons: true,
+     dangerMode: true,
+   }).then((willDelete) => {
+  if (willDelete) {
+    $.ajax({
            url: '/students/'+id+'/delete',
            type: 'DELETE',
            data: {
@@ -93,7 +106,8 @@
                 })
            }
        });
-    }
+  }
+});
   }
  </script>
 @endsection

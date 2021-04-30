@@ -50,8 +50,14 @@
  <script>
      $('#students').DataTable();
     function archiveStudent(id){
-       if (confirm('Are you sure you want to archive this record?')){
-          $.ajax({
+        swal({
+          title: "Are you sure you want to archive this record?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        }).then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
               url: 'students/'+id,
               type: 'DELETE',
               data: {
@@ -68,8 +74,9 @@
                     window.location.reload();
                 })
               }
-          })
-       }
+          });
+        }
+       });
     }
  </script>
 @endsection

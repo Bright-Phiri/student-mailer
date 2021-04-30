@@ -61,8 +61,14 @@
                buttons: 'Ok'
            });
        } else {
-           if (confirm('Are you sure you want to update this record?')){
-            $.ajax({
+           swal({
+             title: "Save changes?",
+             icon: "warning",
+             buttons: true,
+             dangerMode: true,
+           }).then((willDelete) => {
+             if (willDelete) {
+               $.ajax({
                url: '{{ route('students.update') }}',
                type: 'PUT',
                data: $('#student_form').serialize(),
@@ -80,8 +86,9 @@
                }
            });
            }
-       }
-   });
+});
+}
+});
 </script>
 @endsection
 
